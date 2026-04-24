@@ -125,7 +125,7 @@ This creates `data/filtered_gene_bc_matrices/hg19/` containing:
 ## Repository Structure
 
 ```
-Single-Cell RNA-seq Analysis with Scanpy/
+Single-Cell_RNA-seq_Tutorial/
 ├── README.md                              ← This file
 ├── environment.yml                        ← Conda environment (recommended)
 ├── requirements.txt                       ← pip install alternative
