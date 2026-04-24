@@ -236,7 +236,7 @@ sc.pp.regress_out(adata, ['total_counts', 'pct_counts_mt'])
 sc.pp.scale(adata, max_value=10)
 ```
 
-![HVG plot](results/figures/hvg_plot.png)
+[HVG plot](results/figures/hvg_plot.png)
 
 ---
 
@@ -249,7 +249,7 @@ sc.tl.umap(adata)
 sc.tl.tsne(adata)
 ```
 
-![PCA variance](results/figures/pca_variance.png)
+[PCA variance](results/figures/pca_variance.png)
 
 ---
 
@@ -259,8 +259,8 @@ sc.tl.tsne(adata)
 sc.tl.louvain(adata)
 ```
 
-![UMAP Louvain](results/figures/umap_louvain.png)
-![t-SNE Louvain](results/figures/tsne_louvain.png)
+[UMAP Louvain](results/figures/umap_louvain.png)
+[t-SNE Louvain](results/figures/tsne_louvain.png)
 
 **Result:** 8 distinct Louvain clusters identified
 
@@ -272,8 +272,8 @@ sc.tl.louvain(adata)
 sc.tl.rank_genes_groups(adata, 'louvain', method='wilcoxon')
 ```
 
-![Marker heatmap](results/figures/marker_genes_heatmap.png)
-![Marker dotplot](results/figures/marker_genes_dotplot.png)
+[Marker heatmap](results/figures/marker_genes_heatmap.png)
+[Marker dotplot](results/figures/marker_genes_dotplot.png)
 
 ---
 
@@ -292,9 +292,9 @@ Clusters were annotated using known PBMC marker genes:
 | 6 | FCGR3A+ Monocytes | FCGR3A, MS4A7 |
 | 7 | DC / Platelets | FCER1A, PPBP |
 
-![UMAP cell types](results/figures/umap_celltype.png)
-![Stacked violin](results/figures/stacked_violin_markers.png)
-![Cell type proportions](results/figures/celltype_proportions.png)
+[UMAP cell types](results/figures/umap_celltype.png)
+[Stacked violin](results/figures/stacked_violin_markers.png)
+[Cell type proportions](results/figures/celltype_proportions.png)
 
 ---
 
