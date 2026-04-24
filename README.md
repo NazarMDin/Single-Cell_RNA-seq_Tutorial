@@ -364,7 +364,7 @@ tar -xzf pbmc3k_filtered_gene_bc_matrices.tar.gz
 cd ..
 
 # 4. Launch notebook
-jupyter notebook notebook/pbmc3k_analysis.ipynb
+jupyter notebook Notebook/pbmc3k_analysis.ipynb
 ```
 
 ---
