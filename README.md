@@ -350,7 +350,7 @@ sc.logging.print_header()
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/yourusername/scanpy-scrna-pbmc3k.git
+git clone https://github.com/NazarMDinSingle-Cell_RNA-seq_Tutorial.git
 cd scanpy-scrna-pbmc3k
 
 # 2. Set up environment
