@@ -125,21 +125,19 @@ This creates `data/filtered_gene_bc_matrices/hg19/` containing:
 ## Repository Structure
 
 ```
-scanpy-scrna-pbmc3k/
+Single-Cell RNA-seq Analysis with Scanpy/
 ├── README.md                              ← This file
 ├── environment.yml                        ← Conda environment (recommended)
 ├── requirements.txt                       ← pip install alternative
-├── LICENSE                                ← MIT licence
 ├── CITATION.cff                           ← Citation metadata
-├── notebook/
+├── Notebook/
 │   └── pbmc3k_analysis.ipynb             ← Complete analysis notebook
-├── methods/
+├── Methods/
 │   └── METHODS.md                        ← Detailed methods for each step
-├── discussion/
+├── Discussion/
 │   └── DISCUSSION.md                     ← Results interpretation
-├── results/
+├── Results/
 │   ├── pbmc3k.h5ad                       ← Final AnnData object (regenerate by running notebook)
-│   ├── FIGURES.md                        ← Figure descriptions and how to regenerate
 │   └── figures/
 │       ├── qc_violin.png                 ← QC metrics violin plot
 │       ├── qc_scatter.png                ← Total counts vs genes scatter
@@ -153,7 +151,7 @@ scanpy-scrna-pbmc3k/
 │       ├── marker_genes_heatmap.png      ← Heatmap of top marker genes per cluster
 │       ├── stacked_violin_markers.png    ← Stacked violin of marker genes
 │       └── celltype_proportions.png      ← Bar chart of cell type proportions
-└── data/
+└── Data/
     └── .gitkeep                          ← Folder tracked; raw data downloaded separately
 ```
 
