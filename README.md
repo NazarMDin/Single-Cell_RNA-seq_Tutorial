@@ -212,8 +212,8 @@ adata = adata[adata.obs.pct_counts_mt < 5, :]
 
 | Plot | Description |
 |---|---|
-| ![QC violin](results/figures/qc_violin.png) | Distribution of QC metrics per cell |
-| ![QC scatter](results/figures/qc_scatter.png) | Total counts vs number of genes |
+| [QC violin](results/figures/qc_violin.png) | Distribution of QC metrics per cell |
+| [QC scatter](results/figures/qc_scatter.png) | Total counts vs number of genes |
 
 ---
 
