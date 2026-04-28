@@ -258,7 +258,7 @@ jupyter notebook Notebook/pbmc3k_analysis.ipynb
 ```
 
 For Tutorial 1 (Galaxy), visit [usegalaxy.org](https://usegalaxy.org) — no local installation needed.  
-For Tutorial 2 (AnnData), read [`AnnData_Getting_Started/ANNDATA_NOTES.md`](AnnData_Getting_Started/ANNDATA_NOTES.md).
+For Tutorial 2 (AnnData), read [`Notebook/Anndata.ipynb`](Notebook/Anndata.ipynb).
 
 ---
 
