@@ -1,44 +1,95 @@
-# 🔬 Single-Cell RNA-seq Analysis with Scanpy
+# 🔬 Single-Cell RNA-seq Tutorial Collection
 
+This repository documents a progressive, hands-on journey through single-cell RNA-seq analysis — from raw sequencing data to annotated cell type clusters. It covers three complementary tutorials spanning upstream pre-processing, core data structures, and full downstream analysis.
+
+---
+
+## 📚 Tutorials in This Repository
+
+| # | Tutorial | Platform | Focus |
+|---|----------|----------|-------|
+| 1 | [10X Pre-processing (Galaxy)](#tutorial-1-pre-processing-of-10x-scrna-seq-data) | Galaxy (GUI) | BCL → count matrix |
+| 2 | [AnnData Getting Started](#tutorial-2-getting-started-with-anndata) | Python / Jupyter | Core data structure |
+| 3 | [PBMC3k Scanpy Analysis](#tutorial-3-single-cell-rna-seq-analysis-with-scanpy) | Python / Jupyter | Full downstream pipeline |
+
+---
+
+## Tutorial 1: Pre-processing of 10X scRNA-seq Data
+
+**Source:** [Galaxy Training Network](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html)  
+**Platform:** [Galaxy Project](https://usegalaxy.org) — no coding required  
+**Notes:** [`Galaxy_10X_Preprocessing/GALAXY_10X_NOTES.md`](Galaxy_10X_Preprocessing/GALAXY_10X_NOTES.md)
+
+This tutorial covers the **upstream** stage: taking raw 10X Genomics FASTQ files and producing a count matrix using **STARsolo** on the Galaxy platform.
+
+### What you'll learn
+- How the 10X Chromium droplet-based sequencing works
+- File formats: BCL, FASTQ, MTX, HDF5
+- Using STARsolo as a free, open-source alternative to Cell Ranger
+- Distinguishing valid cells from empty droplets and doublets
+
+### Workflow Summary
+```
+FASTQ files (Read1: barcode+UMI, Read2: cDNA)
+       │
+       ▼
+  [STARsolo on Galaxy]
+  Align + demultiplex
+       │
+       ▼
+  Count Matrix (MTX or HDF5)
+  Rows = cells, Columns = genes
+       │
+       ▼
+  Quality assessment → ready for Scanpy
+```
+
+---
+
+## Tutorial 2: Getting Started with AnnData
+
+**Source:** [scverse-tutorials (readthedocs)](https://scverse-tutorials.readthedocs.io/en/latest/notebooks/anndata_getting_started.html)  
+**Platform:** Python / Jupyter Notebook  
+**Notes:** [`AnnData_Getting_Started/ANNDATA_NOTES.md`](AnnData_Getting_Started/ANNDATA_NOTES.md)
+
+This tutorial introduces **AnnData** — the fundamental data structure underlying Scanpy and the entire scverse ecosystem. Understanding AnnData is essential for working with any single-cell Python tool.
+
+### What you'll learn
+- The anatomy of an `AnnData` object and all its slots
+- How to load, inspect, and subset `.h5ad` files
+- Working with sparse matrices for memory efficiency
+- Difference between views and copies
+
+### AnnData Slot Quick Reference
+
+| Slot | Contents |
+|------|----------|
+| `adata.X` | Active data matrix (cells × genes) |
+| `adata.obs` | Cell-level metadata (QC, cluster labels) |
+| `adata.var` | Gene-level metadata (HVG flags, stats) |
+| `adata.obsm` | Multi-dim embeddings (PCA, UMAP, t-SNE) |
+| `adata.obsp` | Cell-cell pairwise matrices (distances, adjacency) |
+| `adata.layers` | Alternative matrices (raw counts, CPM, etc.) |
+| `adata.uns` | Unstructured metadata (colours, parameters) |
+
+```python
+import anndata
+adata = anndata.read_h5ad('path/to/file.h5ad')
+print(adata)   # inspect the object
+```
+
+---
+
+## Tutorial 3: Single-Cell RNA-seq Analysis with Scanpy
+
+**Source:** [scverse/scanpy-tutorials — basic-scrna-tutorial.ipynb](https://github.com/scverse/scanpy-tutorials/blob/main/basic-scrna-tutorial.ipynb)  
 **Dataset:** 3k PBMCs from a Healthy Donor (10x Genomics)  
-**Tool:** Scanpy (Python-based single-cell analysis)  
-**Tutorial source:** [scverse/scanpy-tutorials — basic-scrna-tutorial.ipynb](https://github.com/scverse/scanpy-tutorials/blob/main/basic-scrna-tutorial.ipynb)  
+**Notebook:** [`Notebook/pbmc3k_analysis.ipynb`](Notebook/pbmc3k_analysis.ipynb)  
 **Reference:** Wolf et al., *Genome Biology*, 2018
 
----
+This is the full **downstream analysis** pipeline — starting from a count matrix and ending with annotated cell type clusters.
 
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Pipeline Summary](#pipeline-summary)
-- [Dataset](#dataset)
-- [Repository Structure](#repository-structure)
-- [Step-by-Step Workflow](#step-by-step-workflow)
-  - [1. Data Loading](#1-data-loading)
-  - [2. Quality Control](#2-quality-control)
-  - [3. Normalisation](#3-normalisation)
-  - [4. Feature Selection](#4-feature-selection)
-  - [5. Dimensionality Reduction](#5-dimensionality-reduction)
-  - [6. Clustering](#6-clustering)
-  - [7. Marker Gene Identification](#7-marker-gene-identification)
-  - [8. Cell Type Annotation](#8-cell-type-annotation)
-- [Key Results](#key-results)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Discussion](#discussion)
-- [References](#references)
-
----
-
-## Overview
-
-This repository documents the completion of the Scanpy basic scRNA-seq tutorial using the canonical **PBMC3k dataset** — 2,700 peripheral blood mononuclear cells sequenced on the 10x Genomics Chromium platform. The analysis covers the full single-cell RNA-seq downstream analysis workflow: from raw count matrix to annotated cell type clusters.
-
-Single-cell RNA sequencing (scRNA-seq) allows the measurement of gene expression in individual cells rather than bulk tissue, revealing cellular heterogeneity that would otherwise be masked. This tutorial demonstrates how to process, cluster, and annotate single-cell data using the Scanpy ecosystem.
-
----
-
-## Pipeline Summary
+### Pipeline Summary
 
 ```
 Raw count matrix (10x MTX format)
@@ -90,199 +141,32 @@ Raw count matrix (10x MTX format)
   Cluster labels → known cell types
 ```
 
----
+### Dataset
 
-## Dataset
-
-**PBMC3k** — 2,700 Peripheral Blood Mononuclear Cells from a Healthy Donor  
-Freely available from 10x Genomics.
+**PBMC3k** — 2,700 Peripheral Blood Mononuclear Cells from a Healthy Donor
 
 | Property | Value |
-|---|---|
+|----------|-------|
 | Cells | 2,700 (after QC: ~2,638) |
 | Genes | 32,738 (after filtering: HVGs retained) |
 | Sequencer | Illumina NextSeq 500 |
-| Reads per cell | ~69,000 |
 | Chemistry | 10x Genomics v1 |
 | Reference genome | hg19 (GRCh37) |
 
-### Download the raw data
+### Key Results
 
-```bash
-mkdir -p data
-cd data
-curl -O https://cf.10xgenomics.com/samples/cell/pbmc3k/pbmc3k_filtered_gene_bc_matrices.tar.gz
-tar -xzf pbmc3k_filtered_gene_bc_matrices.tar.gz
-```
+| Step | Before | After |
+|------|--------|-------|
+| Cells | 2,700 | 2,638 |
+| Genes | 32,738 | HVGs selected |
+| PCs used | — | 40 |
+| Clusters | — | 8 Louvain clusters |
+| Cell types | — | 8 PBMC subtypes |
 
-This creates `data/filtered_gene_bc_matrices/hg19/` containing:
-- `matrix.mtx` — sparse count matrix
-- `genes.tsv` — gene names
-- `barcodes.tsv` — cell barcodes
+### Cell Type Annotations
 
----
-
-## Repository Structure
-
-```
-Single-Cell_RNA-seq_Tutorial/
-├── README.md                              ← This file
-├── environment.yml                        ← Conda environment (recommended)
-├── requirements.txt                       ← pip install alternative
-├── CITATION.cff                           ← Citation metadata
-├── Notebook/
-│   └── pbmc3k_analysis.ipynb             ← Complete analysis notebook
-├── Methods/
-│   └── METHODS.md                        ← Detailed methods for each step
-├── Discussion/
-│   └── DISCUSSION.md                     ← Results interpretation
-├── Results/
-│   ├── pbmc3k.h5ad                       ← Final AnnData object (regenerate by running notebook)
-│   └── figures/
-│       ├── qc_violin.png                 ← QC metrics violin plot
-│       ├── qc_scatter.png                ← Total counts vs genes scatter
-│       ├── hvg_plot.png                  ← Highly variable genes plot
-│       ├── pca_variance.png              ← PCA variance ratio (elbow plot)
-│       ├── umap_louvain.png              ← UMAP coloured by cluster
-│       ├── umap_celltype.png             ← UMAP coloured by annotated cell type
-│       ├── umap_marker_expression.png    ← UMAP coloured by known marker genes
-│       ├── tsne_louvain.png              ← t-SNE coloured by cluster
-│       ├── marker_genes_dotplot.png      ← Dot plot of canonical marker genes
-│       ├── marker_genes_heatmap.png      ← Heatmap of top marker genes per cluster
-│       ├── stacked_violin_markers.png    ← Stacked violin of marker genes
-│       └── celltype_proportions.png      ← Bar chart of cell type proportions
-└── Data/
-    └── .gitkeep                          ← Folder tracked; raw data downloaded separately
-```
-
-> **Note:** Raw data files and `pbmc3k.h5ad` are not tracked in git (see `.gitignore`). Run the notebook end-to-end to regenerate all outputs.
-
----
-
-## Step-by-Step Workflow
-
-### 1. Data Loading
-
-The raw count matrix was read from the 10x MTX format into an **AnnData** object using Scanpy.
-
-```python
-import scanpy as sc
-
-adata = sc.read_10x_mtx(
-    'data/filtered_gene_bc_matrices/hg19/',
-    var_names='gene_symbols',
-    cache=True,
-)
-adata.var_names_make_unique()
-```
-
-**Initial object:** 2,700 cells × 32,738 genes
-
-| AnnData slot | Contents |
-|---|---|
-| `adata.X` | Count matrix (cells × genes) |
-| `adata.obs` | Cell metadata (QC metrics, cluster labels) |
-| `adata.var` | Gene metadata (HVG flags, means, dispersions) |
-| `adata.uns` | Unstructured data (PCA, neighbours, colours) |
-| `adata.obsm` | Embeddings (PCA, UMAP, t-SNE coordinates) |
-
----
-
-### 2. Quality Control
-
-Low-quality cells were filtered based on three metrics:
-
-| Metric | Threshold | Rationale |
-|---|---|---|
-| `n_genes_by_counts` | < 200 | Likely empty droplet |
-| `n_genes_by_counts` | > 2,500 | Likely doublet (two cells captured together) |
-| `pct_counts_mt` | > 5% | Dying or damaged cell |
-
-```python
-adata.var['mt'] = adata.var_names.str.startswith('MT-')
-sc.pp.calculate_qc_metrics(adata, qc_vars=['mt'], percent_top=None, log1p=False, inplace=True)
-
-sc.pp.filter_cells(adata, min_genes=200)
-sc.pp.filter_genes(adata, min_cells=3)
-adata = adata[adata.obs.n_genes_by_counts < 2500, :]
-adata = adata[adata.obs.pct_counts_mt < 5, :]
-```
-
-**After QC:** 2,638 cells retained
-
-| Plot | Description |
-|---|---|
-| [QC violin](results/figures/qc_violin.png) | Distribution of QC metrics per cell |
-| [QC scatter](results/figures/qc_scatter.png) | Total counts vs number of genes |
-
----
-
-### 3. Normalisation
-
-```python
-sc.pp.normalize_total(adata, target_sum=1e4)   # scale to 10,000 counts per cell
-sc.pp.log1p(adata)                              # log(x + 1) transform
-adata.raw = adata                               # freeze for later DE testing
-```
-
----
-
-### 4. Feature Selection
-
-```python
-sc.pp.highly_variable_genes(adata, min_mean=0.0125, max_mean=3, min_disp=0.5)
-adata = adata[:, adata.var.highly_variable]
-sc.pp.regress_out(adata, ['total_counts', 'pct_counts_mt'])
-sc.pp.scale(adata, max_value=10)
-```
-
-[HVG plot](results/figures/hvg_plot.png)
-
----
-
-### 5. Dimensionality Reduction
-
-```python
-sc.tl.pca(adata, svd_solver='arpack')
-sc.pp.neighbors(adata, n_neighbors=10, n_pcs=40)
-sc.tl.umap(adata)
-sc.tl.tsne(adata)
-```
-
-[PCA variance](results/figures/pca_variance.png)
-
----
-
-### 6. Clustering
-
-```python
-sc.tl.louvain(adata)
-```
-
-[UMAP Louvain](results/figures/umap_louvain.png)
-[t-SNE Louvain](results/figures/tsne_louvain.png)
-
-**Result:** 8 distinct Louvain clusters identified
-
----
-
-### 7. Marker Gene Identification
-
-```python
-sc.tl.rank_genes_groups(adata, 'louvain', method='wilcoxon')
-```
-
-[Marker heatmap](results/figures/marker_genes_heatmap.png)
-[Marker dotplot](results/figures/marker_genes_dotplot.png)
-
----
-
-### 8. Cell Type Annotation
-
-Clusters were annotated using known PBMC marker genes:
-
-| Cluster | Cell type | Key markers |
-|---|---|---|
+| Cluster | Cell Type | Key Markers |
+|---------|-----------|-------------|
 | 0 | CD4+ T cells | IL7R, CCR7 |
 | 1 | CD14+ Monocytes | CD14, LYZ |
 | 2 | CD4+ T cells (memory) | IL7R, S100A4 |
@@ -292,37 +176,48 @@ Clusters were annotated using known PBMC marker genes:
 | 6 | FCGR3A+ Monocytes | FCGR3A, MS4A7 |
 | 7 | DC / Platelets | FCER1A, PPBP |
 
-[UMAP cell types](results/figures/umap_celltype.png)
-[Stacked violin](results/figures/stacked_violin_markers.png)
-[Cell type proportions](results/figures/celltype_proportions.png)
+---
+
+## 📁 Repository Structure
+
+```
+Single-Cell_RNA-seq_Tutorial/
+├── README.md                                  ← This file
+├── environment.yml                            ← Conda environment
+├── requirements.txt                           ← pip alternative
+├── CITATION.cff                               ← Citation metadata
+│
+├── Notebook/
+│   └── pbmc3k_analysis.ipynb                 ← Tutorial 3: Full Scanpy pipeline
+│
+├── AnnData_Getting_Started/
+│   └── ANNDATA_NOTES.md                      ← Tutorial 2: AnnData reference guide
+│
+├── Galaxy_10X_Preprocessing/
+│   └── GALAXY_10X_NOTES.md                   ← Tutorial 1: Galaxy pre-processing notes
+│
+├── Methods/
+│   └── METHODS.md                            ← Detailed methods (Tutorial 3)
+│
+├── Discussion/
+│   └── DISCUSSION.md                         ← Results interpretation (Tutorial 3)
+│
+├── Results/
+│   └── Figures/                              ← Generated plots from Tutorial 3
+│       ├── qc_violin.png
+│       ├── umap_louvain.png
+│       ├── umap_celltype.png
+│       └── ...
+│
+└── Data/
+    └── .gitkeep                              ← Raw data downloaded separately
+```
+
+> **Note:** Raw data files and `.h5ad` outputs are not tracked in git. Run the notebook to regenerate them.
 
 ---
 
-## Key Results
-
-| Step | Before | After |
-|---|---|---|
-| Cells | 2,700 | 2,638 |
-| Genes | 32,738 | HVGs selected |
-| PCs used | — | 40 |
-| Clusters | — | 8 Louvain clusters |
-| Cell types | — | 8 PBMC subtypes |
-
-**Cell type proportions (approximate):**
-
-| Cell type | ~% of cells |
-|---|---|
-| CD4+ T cells (all) | ~50% |
-| CD14+ Monocytes | ~20% |
-| B cells | ~10% |
-| CD8+ T cells | ~8% |
-| NK cells | ~6% |
-| FCGR3A+ Monocytes | ~4% |
-| DC / Platelets | ~2% |
-
----
-
-## Installation
+## ⚙️ Installation
 
 ### Option A — Conda (recommended)
 
@@ -346,43 +241,47 @@ sc.logging.print_header()
 
 ---
 
-## Usage
+## 🚀 Usage
 
 ```bash
 # 1. Clone the repo
 git clone https://github.com/NazarMDin/Single-Cell_RNA-seq_Tutorial.git
-cd scanpy-scrna-pbmc3k
+cd Single-Cell_RNA-seq_Tutorial
 
 # 2. Set up environment
 conda env create -f environment.yml
 conda activate scanpy-pbmc
 
-# 3. Download data
-mkdir -p data && cd data
+# 3. Download PBMC3k data (for Tutorial 3)
+mkdir -p Data && cd Data
 curl -O https://cf.10xgenomics.com/samples/cell/pbmc3k/pbmc3k_filtered_gene_bc_matrices.tar.gz
 tar -xzf pbmc3k_filtered_gene_bc_matrices.tar.gz
 cd ..
 
-# 4. Launch notebook
+# 4. Launch notebook (Tutorial 3)
 jupyter notebook Notebook/pbmc3k_analysis.ipynb
 ```
 
----
-
-## Discussion
-
-The PBMC3k dataset is a well-characterised benchmark, and the results closely match the expected biology of peripheral blood. Eight distinct cell populations were recovered corresponding to the major PBMC subtypes. The clean separation of two monocyte populations (classical CD14+ and non-classical FCGR3A+) and three T cell subsets (CD4+ naive, CD4+ memory, CD8+) demonstrates the resolution advantage of scRNA-seq over bulk sequencing approaches.
-
-See [`discussion/DISCUSSION.md`](discussion/DISCUSSION.md) for a full step-by-step interpretation of every result, comparison to expected cell type proportions, and discussion of limitations.
+For Tutorial 1 (Galaxy), visit [usegalaxy.org](https://usegalaxy.org) — no local installation needed.  
+For Tutorial 2 (AnnData), read [`AnnData_Getting_Started/ANNDATA_NOTES.md`](AnnData_Getting_Started/ANNDATA_NOTES.md).
 
 ---
 
-## References
+## 💬 Discussion
+
+See [`Discussion/DISCUSSION.md`](Discussion/DISCUSSION.md) for a detailed interpretation of the PBMC3k clustering results, comparison to expected cell type proportions, and discussion of limitations.
+
+---
+
+## 📖 References
 
 - Wolf, F.A. et al. (2018). Scanpy: large-scale single-cell gene expression data analysis. *Genome Biology*, 19, 15.
 - Satija, R. et al. (2015). Spatial reconstruction of single-cell gene expression data. *Nature Biotechnology*, 33, 495–502.
+- Dobin, A. et al. (2013). STAR: ultrafast universal RNA-seq aligner. *Bioinformatics*, 29(1), 15–21.
 - Blondel, V.D. et al. (2008). Fast unfolding of communities in large networks. *Journal of Statistical Mechanics*, P10008.
 - McInnes, L. et al. (2018). UMAP: Uniform Manifold Approximation and Projection. *arXiv*, 1802.03426.
 - van der Maaten, L. & Hinton, G. (2008). Visualizing data using t-SNE. *JMLR*, 9, 2579–2605.
 - 10x Genomics PBMC3k dataset: https://support.10xgenomics.com/single-cell-gene-expression/datasets/1.1.0/pbmc3k
 - Scanpy documentation: https://scanpy.readthedocs.io
+- AnnData documentation: https://anndata.readthedocs.io
+- Galaxy Training Network: https://training.galaxyproject.org
