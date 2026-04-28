@@ -1,4 +1,4 @@
-# 🌌 Pre-processing of 10X Single-Cell RNA Datasets (Galaxy)
+# Pre-processing of 10X Single-Cell RNA Datasets (Galaxy)
 
 **Source:** [Galaxy Training Network — Pre-processing of 10X scRNA Datasets](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html)  
 **Platform:** [Galaxy Project](https://usegalaxy.org) (web-based, no coding required)  
@@ -144,10 +144,10 @@ Inspect summary statistics to distinguish:
 
 | Cell type | Characteristics |
 |-----------|----------------|
-| ✅ Valid cell | High UMI count, moderate gene count |
-| ❌ Empty droplet | Very low UMI count |
-| ❌ Doublet | Abnormally high UMI + gene count |
-| ❌ Dying cell | High mitochondrial gene % |
+| Valid cell | High UMI count, moderate gene count |
+| Empty droplet | Very low UMI count |
+| Doublet | Abnormally high UMI + gene count |
+| Dying cell | High mitochondrial gene % |
 
 Use the knee plot / barcode rank plot to set filtering thresholds.
 
