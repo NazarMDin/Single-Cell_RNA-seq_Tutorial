@@ -18,7 +18,7 @@ This repository documents a progressive, hands-on journey through single-cell RN
 
 **Source:** [Galaxy Training Network](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html)  
 **Platform:** [Galaxy Project](https://usegalaxy.org) — no coding required  
-**Notes:** [`Galaxy_10X_Preprocessing/GALAXY_10X_NOTES.md`](Galaxy_10X_Preprocessing/GALAXY_10X_NOTES.md)
+**Notes:** [`Methods/GALAXY_10X_Methods.md`](Methods/GALAXY_10X_Methods.md)
 
 This tutorial covers the **upstream** stage: taking raw 10X Genomics FASTQ files and producing a count matrix using **STARsolo** on the Galaxy platform.
 
@@ -50,7 +50,7 @@ FASTQ files (Read1: barcode+UMI, Read2: cDNA)
 
 **Source:** [scverse-tutorials (readthedocs)](https://scverse-tutorials.readthedocs.io/en/latest/notebooks/anndata_getting_started.html)  
 **Platform:** Python / Jupyter Notebook  
-**Notes:** [`AnnData_Getting_Started/ANNDATA_NOTES.md`](AnnData_Getting_Started/ANNDATA_NOTES.md)
+**Notes:** [`Notebook/Anndata.ipynb`](Notebook/Anndata.ipynb)
 
 This tutorial introduces **AnnData** — the fundamental data structure underlying Scanpy and the entire scverse ecosystem. Understanding AnnData is essential for working with any single-cell Python tool.
 
@@ -258,7 +258,7 @@ jupyter notebook Notebook/pbmc3k_analysis.ipynb
 ```
 
 For Tutorial 1 (Galaxy), visit [usegalaxy.org](https://usegalaxy.org) — no local installation needed.  
-For Tutorial 2 (AnnData), read [`AnnData_Getting_Started/ANNDATA_NOTES.md`](AnnData_Getting_Started/ANNDATA_NOTES.md).
+For Tutorial 2 (AnnData), read [`Methods/ANNDATA_Methods.md`](Methods/ANNDATA_Methods.md).
 
 ---
 
