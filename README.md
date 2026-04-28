@@ -1,4 +1,4 @@
-# 🔬 Single-Cell RNA-seq Tutorial Collection
+# Single-Cell RNA-seq Tutorial Collection
 
 This repository documents a progressive, hands-on journey through single-cell RNA-seq analysis — from raw sequencing data to annotated cell type clusters. It covers three complementary tutorials spanning upstream pre-processing, core data structures, and full downstream analysis.
 
