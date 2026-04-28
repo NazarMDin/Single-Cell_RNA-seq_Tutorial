@@ -1,10 +1,10 @@
-# 🔬 Single-Cell RNA-seq Tutorial Collection
+# Single-Cell RNA-seq Tutorial Collection
 
 This repository documents a progressive, hands-on journey through single-cell RNA-seq analysis — from raw sequencing data to annotated cell type clusters. It covers three complementary tutorials spanning upstream pre-processing, core data structures, and full downstream analysis.
 
 ---
 
-## 📚 Tutorials in This Repository
+## Tutorials in This Repository
 
 | # | Tutorial | Platform | Focus |
 |---|----------|----------|-------|
@@ -178,7 +178,7 @@ Raw count matrix (10x MTX format)
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 Single-Cell_RNA-seq_Tutorial/
@@ -189,25 +189,20 @@ Single-Cell_RNA-seq_Tutorial/
 │
 ├── Notebook/
 │   └── pbmc3k_analysis.ipynb                 ← Tutorial 3: Full Scanpy pipeline
-│
-├── AnnData_Getting_Started/
-│   └── ANNDATA_NOTES.md                      ← Tutorial 2: AnnData reference guide
-│
-├── Galaxy_10X_Preprocessing/
-│   └── GALAXY_10X_NOTES.md                   ← Tutorial 1: Galaxy pre-processing notes
+│   └── Anndata.ipynb                         ← Tutorial 2: Anndata Understanding
 │
 ├── Methods/
-│   └── METHODS.md                            ← Detailed methods (Tutorial 3)
+│   └── Anndata_METHODS.md                    ← Detailed methods (Tutorial 2)
+│   └── GALAXAY_10X_METHODS.md                ← Detailed methods (Tutorial 1)
+│   └── sc-RNA_METHODS.md                     ← Detailed methods (Tutorial 3)
 │
 ├── Discussion/
-│   └── DISCUSSION.md                         ← Results interpretation (Tutorial 3)
+│   └── DISCUSSION.md                         ← Results interpretation
 │
 ├── Results/
-│   └── Figures/                              ← Generated plots from Tutorial 3
-│       ├── qc_violin.png
-│       ├── umap_louvain.png
-│       ├── umap_celltype.png
-│       └── ...
+│   └── Figures_preprocessing                 ← Generated plots from Tutorial 1
+│   └── Figures_anndata                       ← Generated plots from Tutorial 2
+│   └── Figures_sc                            ← Generated plots from Tutorial 3
 │
 └── Data/
     └── .gitkeep                              ← Raw data downloaded separately
@@ -217,7 +212,7 @@ Single-Cell_RNA-seq_Tutorial/
 
 ---
 
-## ⚙️ Installation
+## Installation
 
 ### Option A — Conda (recommended)
 
@@ -241,7 +236,7 @@ sc.logging.print_header()
 
 ---
 
-## 🚀 Usage
+## Usage
 
 ```bash
 # 1. Clone the repo
@@ -267,13 +262,13 @@ For Tutorial 2 (AnnData), read [`AnnData_Getting_Started/ANNDATA_NOTES.md`](AnnD
 
 ---
 
-## 💬 Discussion
+## Discussion
 
 See [`Discussion/DISCUSSION.md`](Discussion/DISCUSSION.md) for a detailed interpretation of the PBMC3k clustering results, comparison to expected cell type proportions, and discussion of limitations.
 
 ---
 
-## 📖 References
+## References
 
 - Wolf, F.A. et al. (2018). Scanpy: large-scale single-cell gene expression data analysis. *Genome Biology*, 19, 15.
 - Satija, R. et al. (2015). Spatial reconstruction of single-cell gene expression data. *Nature Biotechnology*, 33, 495–502.
